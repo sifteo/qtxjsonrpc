@@ -18,7 +18,7 @@ public:
     QList<QVariant> parameters() const;
     
     void setId(const QString & id);
-    void setIdToNull();
+    void clearId();
     void setMethod(const QString & method);
     void addParameter(const QVariant & value);
     

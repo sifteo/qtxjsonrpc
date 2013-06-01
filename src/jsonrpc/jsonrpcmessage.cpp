@@ -56,7 +56,7 @@ void JsonRpcMessage::setId(const QString & id)
     mObject.insert("id", id);
 }
 
-void JsonRpcMessage::setIdToNull()
+void JsonRpcMessage::clearId()
 {
     mObject.insert("id", QVariant());
 }

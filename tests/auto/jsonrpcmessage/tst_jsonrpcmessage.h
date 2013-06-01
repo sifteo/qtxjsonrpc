@@ -16,6 +16,9 @@ private slots:
     void cleanup();
     
     void defaultConstructorTest();
+    void setIdTest();
+    void setMethodTest();
+    void addParameterTest();
 };
 
 #endif // TST_JSONRPCMESSAGE_H
