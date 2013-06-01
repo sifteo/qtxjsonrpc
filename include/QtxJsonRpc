@@ -1,0 +1,7 @@
+#ifndef QTXJSONRPC_MODULE_H
+#define QTXJSONRPC_MODULE_H
+
+#include "../src/jsonrpc/jsonrpcglobal.h"
+#include "../src/jsonrpc/jsonrpcmessage.h"
+
+#endif
