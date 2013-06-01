@@ -1,5 +1,5 @@
-#ifndef JSONRPCMESSAGE_H
-#define JSONRPCMESSAGE_H
+#ifndef QTXJSONRPC_JSONRPCMESSAGE_H
+#define QTXJSONRPC_JSONRPCMESSAGE_H
 
 #include <QtCore>
 
@@ -30,5 +30,4 @@ private:
     QHash<QString, QVariant> mObject;
 };
 
-
-#endif // JSONRPCMESSAGE_H
+#endif // QTXJSONRPC_JSONRPCMESSAGE_H
