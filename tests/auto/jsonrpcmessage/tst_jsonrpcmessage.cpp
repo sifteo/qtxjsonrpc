@@ -1,4 +1,5 @@
 #include "tst_jsonrpcmessage.h"
+#include <QtxJson>
 
 
 void tst_JsonRpcMessage::initTestCase()
@@ -52,6 +53,37 @@ void tst_JsonRpcMessage::addParameterTest()
     QVERIFY(params.length() == 2);
     QCOMPARE(params.at(0).toString(), QString("foo"));
     QCOMPARE(params.at(1).toString(), QString("bar"));
+}
+
+void tst_JsonRpcMessage::isNotificationTest()
+{
+    JsonRpcMessage notification;
+    notification.setMethod("echo");
+    notification.addParameter("foo");
+    QVERIFY(notification.isNotification());
+    
+    JsonRpcMessage request;
+    request.setId("1");
+    request.setMethod("echo");
+    request.addParameter("foo");
+    QVERIFY(!request.isNotification());
+}
+
+void tst_JsonRpcMessage::toStringTest()
+{
+    JsonRpcMessage request;
+    request.setId("1");
+    request.setMethod("echo");
+    request.addParameter("foo");
+    
+    QString data = request.toString();
+    
+    QVariantHash json = Json::parse(data.toUtf8());
+    QCOMPARE(json.value("id").toString(), QString("1"));
+    QCOMPARE(json.value("method").toString(), QString("echo"));
+    QVariantList params = json.value("params").toList();
+    QVERIFY(params.length() == 1);
+    QCOMPARE(params.at(0).toString(), QString("foo"));
 }
 
 

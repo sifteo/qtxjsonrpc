@@ -19,6 +19,10 @@ private slots:
     void setIdTest();
     void setMethodTest();
     void addParameterTest();
+    
+    void isNotificationTest();
+    
+    void toStringTest();
 };
 
 #endif // TST_JSONRPCMESSAGE_H
