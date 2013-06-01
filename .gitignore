@@ -1,4 +1,5 @@
-doc/qtxupdate/
+doc/qtxjsonrpc/
+tests/auto/jsonrpcmessage/tst_jsonrpcmessage
 
 # Mac OS X
 .DS_Store
