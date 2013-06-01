@@ -2,14 +2,12 @@
 #include <QtxJson>
 
 
-JsonRpcMessage::JsonRpcMessage(QObject* parent)
-    : QObject(parent)
+JsonRpcMessage::JsonRpcMessage()
 {
 }
 
-JsonRpcMessage::JsonRpcMessage(const QHash<QString, QVariant> & object, QObject *parent)
-    : QObject(parent),
-      mObject(object)
+JsonRpcMessage::JsonRpcMessage(const QHash<QString, QVariant> & object)
+    : mObject(object)
 {
 }
 

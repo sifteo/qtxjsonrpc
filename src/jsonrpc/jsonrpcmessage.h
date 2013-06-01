@@ -4,12 +4,11 @@
 #include <QtCore>
 
 
-class JsonRpcMessage : public QObject
+class JsonRpcMessage
 {
-Q_OBJECT
 public:
-    JsonRpcMessage(QObject *parent = 0);
-    JsonRpcMessage(const QHash<QString, QVariant> & object, QObject *parent = 0);
+    JsonRpcMessage();
+    JsonRpcMessage(const QHash<QString, QVariant> & object);
     ~JsonRpcMessage();
     
     QString id() const;
