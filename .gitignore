@@ -1,4 +1,5 @@
 doc/qtxjsonrpc/
+tests/auto/jsonrpcconnection/tst_jsonrpcconnection
 tests/auto/jsonrpcmessage/tst_jsonrpcmessage
 
 # Mac OS X
