@@ -19,7 +19,11 @@ private slots:
     void setIdTest();
     void setMethodTest();
     void addParameterTest();
+    void setResultTest();
+    void setErrorTest();
     
+    void isRequestTest();
+    void isResponseTest();
     void isNotificationTest();
     
     void toStringTest();

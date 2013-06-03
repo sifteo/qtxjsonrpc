@@ -49,6 +49,16 @@ QList<QVariant> JsonRpcMessage::parameters() const
     return QList<QVariant>();
 }
 
+QVariant JsonRpcMessage::result() const
+{
+    return mObject.value("result");
+}
+
+QVariant JsonRpcMessage::error() const
+{
+    return mObject.value("error");
+}
+
 void JsonRpcMessage::setId(const QString & id)
 {
     mObject.insert("id", id);
@@ -75,6 +85,38 @@ void JsonRpcMessage::addParameter(const QVariant & value)
         params.append(value);
         mObject.insert("params", params);
     }
+}
+
+void JsonRpcMessage::setResult(const QVariant & value)
+{
+    mObject.insert("result", value);
+}
+
+void JsonRpcMessage::setError(const QVariant & value)
+{
+    mObject.insert("error", value);
+}
+
+bool JsonRpcMessage::isRequest() const
+{
+    if (isNotification()) {
+        return false;
+    }
+    if (mObject.contains("method")) {
+        return true;
+    }
+    return false;
+}
+
+bool JsonRpcMessage::isResponse() const
+{
+    if (isNotification()) {
+        return false;
+    }
+    if (mObject.contains("result") || mObject.contains("error")) {
+        return true;
+    }
+    return false;
 }
 
 bool JsonRpcMessage::isNotification() const

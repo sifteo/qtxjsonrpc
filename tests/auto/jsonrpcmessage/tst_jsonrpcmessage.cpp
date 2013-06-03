@@ -26,6 +26,8 @@ void tst_JsonRpcMessage::defaultConstructorTest()
     QCOMPARE(message.method(), QString(""));
     QVariantList params = message.parameters();
     QVERIFY(params.length() == 0);
+    QCOMPARE(message.result(), QVariant());
+    QCOMPARE(message.error(), QVariant());
 }
 
 void tst_JsonRpcMessage::setIdTest()
@@ -55,6 +57,68 @@ void tst_JsonRpcMessage::addParameterTest()
     QCOMPARE(params.at(1).toString(), QString("bar"));
 }
 
+void tst_JsonRpcMessage::setResultTest()
+{
+    JsonRpcMessage message;
+    message.setResult("foo bar");
+    QCOMPARE(message.result().toString(), QString("foo bar"));
+}
+
+void tst_JsonRpcMessage::setErrorTest()
+{
+    JsonRpcMessage message;
+    message.setError("something went wrong");
+    QCOMPARE(message.error().toString(), QString("something went wrong"));
+}
+
+void tst_JsonRpcMessage::isRequestTest()
+{
+    JsonRpcMessage request;
+    request.setId("1");
+    request.setMethod("echo");
+    request.addParameter("foo");
+    QVERIFY(request.isRequest());
+    
+    JsonRpcMessage response;
+    response.setId("1");
+    response.setResult("echo");
+    QVERIFY(!response.isRequest());
+    
+    JsonRpcMessage errResponse;
+    errResponse.setId("1");
+    errResponse.setError("something went wrong");
+    QVERIFY(!errResponse.isRequest());
+    
+    JsonRpcMessage notification;
+    notification.setMethod("echo");
+    notification.addParameter("foo");
+    QVERIFY(!notification.isRequest());
+}
+
+void tst_JsonRpcMessage::isResponseTest()
+{
+    JsonRpcMessage response;
+    response.setId("1");
+    response.setResult("echo");
+    QVERIFY(response.isResponse());
+    
+    JsonRpcMessage errResponse;
+    errResponse.setId("1");
+    errResponse.setError("something went wrong");
+    QVERIFY(errResponse.isResponse());
+    
+    JsonRpcMessage request;
+    request.setId("1");
+    request.setMethod("echo");
+    request.addParameter("foo");
+    QVERIFY(!request.isResponse());
+    
+    JsonRpcMessage notification;
+    notification.setMethod("echo");
+    notification.addParameter("foo");
+    QVERIFY(!notification.isResponse());
+}
+
 void tst_JsonRpcMessage::isNotificationTest()
 {
     JsonRpcMessage notification;
@@ -67,6 +131,16 @@ void tst_JsonRpcMessage::isNotificationTest()
     request.setMethod("echo");
     request.addParameter("foo");
     QVERIFY(!request.isNotification());
+    
+    JsonRpcMessage response;
+    response.setId("1");
+    response.setResult("echo");
+    QVERIFY(!response.isNotification());
+    
+    JsonRpcMessage errResponse;
+    errResponse.setId("1");
+    errResponse.setError("something went wrong");
+    QVERIFY(!errResponse.isNotification());
 }
 
 void tst_JsonRpcMessage::toStringTest()
